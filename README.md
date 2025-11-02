@@ -18,5 +18,5 @@ Jogue como Felpudo, um passarinho destemido que precisa salvar sua amada Forura 
 
 Quando sua barra de distancia se encher ao maximo quer dizer que seu destino lhe aguarda e Fofura estará logo em frente, alcance-a para finalizar o jogo e ser bem sucedido no resgate de sua amada.
 <p align="center">
-<img src="https://drive.google.com/file/d/1xWl61o-ZhwmwzxPE8Bak-Xd5N1EZ6aCa/view?usp=drive_link">
+<img src="[https://drive.google.com/file/d/1xWl61o-ZhwmwzxPE8Bak-Xd5N1EZ6aCa/view?usp=drive_link](https://drive.google.com/file/d/1xWl61o-ZhwmwzxPE8Bak-Xd5N1EZ6aCa/preview)">
 </p>
