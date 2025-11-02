@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI; // Required for Image component
+using UnityEngine.UI; 
 
 public class PlayerController : MonoBehaviour
 {

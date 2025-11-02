@@ -10,6 +10,7 @@ TagManager:
   - Pear
   - Orange
   - StopBullet
+  - Transition
   layers:
   - Default
   - TransparentFX
