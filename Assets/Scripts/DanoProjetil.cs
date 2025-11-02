@@ -9,9 +9,9 @@ public class DanoProjetil : MonoBehaviour
 
         if (other.gameObject.tag == "Inimigo")
         {
-          
-            Destroy(other.gameObject);
             Destroy(gameObject);
+            Destroy(other.gameObject);
+            
         }
 
         else if (other.gameObject.tag == "StopBullet")

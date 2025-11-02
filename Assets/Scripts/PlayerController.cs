@@ -13,10 +13,13 @@ public class PlayerController : MonoBehaviour
 	private float horizontal;
 	private float speed;
 	private float jumpingPower;
+	public float speedModifier;
 	public float pearModifier;
 	public bool gun;
 	public int timer;
- 
+	public bool endGame;
+	public Animator animator;
+	public float animationSpeed;
 
 
 	[SerializeField] private Image imageSelector, timerBar;
@@ -24,18 +27,23 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private Transform groundCheck;
 	[SerializeField] private LayerMask groundLayer;
 	[SerializeField] private Sprite[] imageBox;
-	[SerializeField] private GameObject gunModel;
+	[SerializeField] private GameObject gunModel, fofura;
 
 	[SerializeField] private AtaqueJogador _ataqueDoJogador;
 
 	void Start()
 	{
+		animationSpeed = 1.5f;
+		animator = GetComponent<Animator>();
+		endGame = false;
+		speedModifier = 1;
 		pearModifier = 1;
 		speed = 4f;
 		jumpingPower = 8f;
 		vidaDoJogador = 4;
 		gun = false;
 
+		StartCoroutine(SpeedModifierUp());
 		StartCoroutine(TimerUp());
 
 	}
@@ -45,15 +53,21 @@ public class PlayerController : MonoBehaviour
 	{
 		horizontal = Input.GetAxisRaw("Horizontal");
 
-		if (Input.GetButton("Jump")  && IsGrounded())
+		if (Input.GetButtonDown("Jump")  && IsGrounded())
 		{
+			 
 			rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+			StartCoroutine(JumpCicle());
+
 		}
 
 		if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
 		{
+			 
 			rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
 		}
+
+	 
 
 		LifeUIUpdate();
 	}
@@ -143,9 +157,40 @@ public class PlayerController : MonoBehaviour
 
 			Destroy(other.gameObject);
 			pearModifier *= 1.2f;
+			speed += 1;
+			animationSpeed += 0.5f;
+			animator.speed = animationSpeed;
 
 		}
 
+		else if (other.gameObject.tag == "Finish")
+		{
+
+			SceneManager.LoadScene("WinScene");
+
+		}
+
+	}
+
+	public void StartTimer()
+	{
+		StartCoroutine(TimerForGun());
+	}
+
+	IEnumerator JumpCicle()
+	{
+		yield return new WaitForSeconds(0.1f);
+        while (!IsGrounded())
+        {
+			animator.SetBool("isJumping", true);
+			yield return null;
+		}
+
+		animator.SetBool("isJumping", false);
+		animator.SetBool("isFalling", true);
+
+		yield return new WaitForSeconds(0);
+		animator.SetBool("isFalling", false);
 	}
 
 	IEnumerator AtirarOn()
@@ -178,18 +223,30 @@ public class PlayerController : MonoBehaviour
 
 		while (timerBar.fillAmount != 1)
 		{
-			timerBar.fillAmount = Mathf.Lerp(timerBar.fillAmount, timerBar.fillAmount += 0.01f, Time.deltaTime * pearModifier);
+			timerBar.fillAmount = Mathf.Lerp(timerBar.fillAmount, timerBar.fillAmount += 0.02f, Time.deltaTime * pearModifier);
 			yield return null;
 
 
 		}
 
+		if(timerBar.fillAmount >= 1)
+        {
+			endGame = true;
+			fofura.SetActive(true);
+        }
 
+		yield return null;
 	}
 
-	public void StartTimer()
-    {
-		StartCoroutine(TimerForGun());
+	IEnumerator SpeedModifierUp()
+	{
+		if (!endGame)
+		{
+			yield return new WaitForSeconds(4);
+			speedModifier += 0.5f;
+
+			StartCoroutine(SpeedModifierUp());
+		}
 	}
 
 }
