@@ -3,7 +3,7 @@
 Esse é um jogo 2D desenvolvido na Unity Engine como projeto prático para a disciplina de programação de jogos no curso de jogos digitais da Universidade do Estado da Bahia e tem por objetivo trabalhar a introdução a animação de sprite e particulas visuais na Unity Engine.
 
 <p align="center">
-<img src="https://drive.google.com/file/d/1tJZtok_y1-GG1Oskc-jjWU5KKrPOOIVr/view?usp=sharing">
+<img src="[https://drive.google.com/file/d/1tJZtok_y1-GG1Oskc-jjWU5KKrPOOIVr/view?usp=sharing](https://drive.google.com/file/d/1xWl61o-ZhwmwzxPE8Bak-Xd5N1EZ6aCa/view)">
 </p>
 
 # Gameplay
